@@ -50,7 +50,7 @@ public class MainActivityFragment extends Fragment {
         if (toast != null) {
             toast.cancel();
         }
-        toast = Toast.makeText(getContext(), Jokes.getJoke(), Toast.LENGTH_SHORT);
+        toast = Toast.makeText(getContext(), Jokes.getJoke(), Toast.LENGTH_LONG);
         toast.show();
     }
 
