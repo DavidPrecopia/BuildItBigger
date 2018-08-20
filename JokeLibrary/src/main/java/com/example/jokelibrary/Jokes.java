@@ -5,8 +5,11 @@ import java.util.List;
 
 public class Jokes {
     private static final List<String> jokesList;
+    private static int jokeIndex;
 
     static {
+        jokeIndex = 0;
+
         jokesList = new ArrayList<>();
         jokesList.add("Knock knock.\nRace condition.\nWho's there?");
         jokesList.add("A guy walks into a bar and asks for 1.4 root beers. The bartender says \"I'll have to charge you extra, that's a root beer float\". The guy says \"In that case, better make it a double.\"");
@@ -17,10 +20,13 @@ public class Jokes {
     }
 
     public static String getJoke() {
-        return jokesList.get(randomNumber());
+        return jokesList.get(getIndex());
     }
 
-    private static int randomNumber() {
-        return (int) (Math.floor(Math.random() * jokesList.size()));
+    private static int getIndex() {
+        if (jokeIndex == (jokesList.size() - 1)) {
+            jokeIndex = 0;
+        }
+        return ++jokeIndex;
     }
 }
