@@ -24,9 +24,9 @@ public class Jokes {
     }
 
     private static int getIndex() {
-        if (jokeIndex == (jokesList.size() - 1)) {
+        if (jokeIndex == jokesList.size()) {
             jokeIndex = 0;
         }
-        return ++jokeIndex;
+        return jokeIndex++;
     }
 }
