@@ -1,5 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.displayjoke.DisplayJokeActivity;
 import com.example.jokelibrary.Jokes;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -41,17 +43,11 @@ public class MainActivityFragment extends Fragment {
         binding.buttonTellJoke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                jokeToast();
+                Intent intent = new Intent(getContext(), DisplayJokeActivity.class);
+                intent.putExtra(DisplayJokeActivity.class.getSimpleName(), Jokes.getJoke());
+                startActivity(intent);
             }
         });
-    }
-
-    private void jokeToast() {
-        if (toast != null) {
-            toast.cancel();
-        }
-        toast = Toast.makeText(getContext(), Jokes.getJoke(), Toast.LENGTH_LONG);
-        toast.show();
     }
 
     private void setUpAdView() {
