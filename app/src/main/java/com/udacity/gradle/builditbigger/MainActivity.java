@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, "Manfred"));
+        // TODO Move to fragment
+        new EndpointsAsyncTask().execute();
     }
 }

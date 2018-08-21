@@ -27,6 +27,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="JokeLibrary" exported="" />
+    <orderEntry type="module" module-name="JokeLibrary" exported="" />
     <orderEntry type="library" exported="" scope="PROVIDED" name="endpoints-framework-2.1.2" level="project" />
     <orderEntry type="library" exported="" scope="PROVIDED" name="javax.inject-1" level="project" />
     <orderEntry type="library" exported="" scope="PROVIDED" name="google-api-client-appengine-1.23.0" level="project" />
