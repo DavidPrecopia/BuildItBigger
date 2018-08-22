@@ -2,9 +2,11 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +16,18 @@ import com.example.displayjoke.DisplayJokeActivity;
 import com.example.jokelibrary.Jokes;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
+import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
+import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 import com.udacity.gradle.builditbigger.databinding.FragmentMainBinding;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+import java.io.IOException;
+
 public class MainActivityFragment extends Fragment {
 
     private FragmentMainBinding binding;
-
-    private Toast toast;
 
     public MainActivityFragment() {
     }
@@ -35,6 +39,8 @@ public class MainActivityFragment extends Fragment {
 
         setUpOnClickListener();
         setUpAdView();
+
+        new EndpointsAsyncTask().execute();
 
         return binding.getRoot();
     }
@@ -59,5 +65,39 @@ public class MainActivityFragment extends Fragment {
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
+    }
+
+
+    static final class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
+
+        private static MyApi myApiService;
+
+        EndpointsAsyncTask() {
+            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
+                    new AndroidJsonFactory(), null)
+                    .setRootUrl("http://10.0.0.3:8080/_ah/api/")
+                    .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
+                        @Override
+                        public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) {
+                            abstractGoogleClientRequest.setDisableGZipContent(true);
+                        }
+                    });
+            myApiService = builder.build();
+        }
+
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                return myApiService.myEndpoint().sayHi().execute().getData();
+            } catch (IOException e) {
+                return e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.d("LOG_TAG", result);
+        }
     }
 }
