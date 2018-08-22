@@ -78,7 +78,7 @@ dependencies {
 
     // Current version is working
     //noinspection GradleDependency
-    freeImplementation 'com.google.android.gms:play-services-ads:11.8.0'
+    implementation 'com.google.android.gms:play-services-ads:11.8.0'
 
     debugImplementation 'com.jakewharton.timber:timber:4.7.1'
 

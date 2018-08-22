@@ -67,6 +67,8 @@ public class MainActivityFragment extends Fragment {
     private void setUpAdView() {
         if (AdUtil.haveAds()) {
             binding.adView.loadAd(AdUtil.getAdRequest());
+        } else {
+            binding.adView.setVisibility(View.GONE);
         }
     }
 

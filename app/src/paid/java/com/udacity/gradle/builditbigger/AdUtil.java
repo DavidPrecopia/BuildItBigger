@@ -6,12 +6,11 @@ final class AdUtil {
     private AdUtil() {
     }
 
-
     public static boolean haveAds() {
         return false;
     }
 
     public static AdRequest getAdRequest() {
-        return null;
+        throw new IllegalStateException();
     }
 }
