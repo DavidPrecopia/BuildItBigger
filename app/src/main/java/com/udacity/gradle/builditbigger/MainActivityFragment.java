@@ -60,6 +60,7 @@ public class MainActivityFragment extends Fragment {
         binding.buttonTellJoke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBarVisibility(View.VISIBLE);
                 asyncTask.execute();
             }
         });
@@ -76,16 +77,20 @@ public class MainActivityFragment extends Fragment {
         mAdView.loadAd(adRequest);
     }
 
-
     private void observeLiveData() {
         this.joke.observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String jokeString) {
+                progressBarVisibility(View.GONE);
                 Intent intent = new Intent(getContext(), DisplayJokeActivity.class);
                 intent.putExtra(DisplayJokeActivity.class.getSimpleName(), jokeString);
                 startActivity(intent);
             }
         });
+    }
+
+    private void progressBarVisibility(int visibility) {
+        binding.progressBar.setVisibility(visibility);
     }
 
 
