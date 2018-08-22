@@ -1,19 +1,19 @@
 package com.udacity.gradle.builditbigger;
 
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.displayjoke.DisplayJokeActivity;
-import com.example.jokelibrary.Jokes;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -29,29 +29,38 @@ public class MainActivityFragment extends Fragment {
 
     private FragmentMainBinding binding;
 
+    private MutableLiveData<String> joke;
+    private EndpointsAsyncTask asyncTask;
+
+
     public MainActivityFragment() {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.joke = new MutableLiveData<>();
+        this.asyncTask = new EndpointsAsyncTask(joke);
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
-
-        setUpOnClickListener();
-        setUpAdView();
-
-        new EndpointsAsyncTask().execute();
-
+        init();
         return binding.getRoot();
+    }
+
+    private void init() {
+        setUpOnClickListener();
+        observeLiveData();
+        setUpAdView();
     }
 
     private void setUpOnClickListener() {
         binding.buttonTellJoke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), DisplayJokeActivity.class);
-                intent.putExtra(DisplayJokeActivity.class.getSimpleName(), Jokes.getJoke());
-                startActivity(intent);
+                asyncTask.execute();
             }
         });
     }
@@ -68,11 +77,25 @@ public class MainActivityFragment extends Fragment {
     }
 
 
+    private void observeLiveData() {
+        this.joke.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String jokeString) {
+                Intent intent = new Intent(getContext(), DisplayJokeActivity.class);
+                intent.putExtra(DisplayJokeActivity.class.getSimpleName(), jokeString);
+                startActivity(intent);
+            }
+        });
+    }
+
+
     static final class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
 
         private static MyApi myApiService;
+        private final MutableLiveData<String> joke;
 
-        EndpointsAsyncTask() {
+        EndpointsAsyncTask(MutableLiveData<String> joke) {
+            this.joke = joke;
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                     .setRootUrl("http://10.0.0.3:8080/_ah/api/")
@@ -97,7 +120,7 @@ public class MainActivityFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.d("LOG_TAG", result);
+            joke.setValue(result);
         }
     }
 }
