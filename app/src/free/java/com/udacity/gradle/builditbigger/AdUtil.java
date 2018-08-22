@@ -2,7 +2,7 @@ package com.udacity.gradle.builditbigger;
 
 import com.google.android.gms.ads.AdRequest;
 
-public final class AdUtil {
+final class AdUtil {
     private AdUtil() {
     }
 
