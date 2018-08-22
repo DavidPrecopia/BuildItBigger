@@ -37,6 +37,17 @@ android {
         debug {
         }
     }
+    flavorDimensions "demo"
+    productFlavors {
+        free {
+            dimension "demo"
+            applicationIdSuffix ".free"
+        }
+        paid {
+            dimension "demo"
+            applicationIdSuffix ".paid"
+        }
+    }
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/LICENSE'
