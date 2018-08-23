@@ -219,18 +219,5 @@
     <orderEntry type="library" name="Gradle: com.android.databinding:baseLibrary:3.1.4@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpclient:4.5.3@jar" level="project" />
     <orderEntry type="module" module-name="displayjokelibrary" />
-    <orderEntry type="module" module-name="JokeLibrary" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-gass-license-11.8.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-basement-license-11.8.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-gass-11.8.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-license-11.8.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-basement-11.8.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-lite-license-11.8.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-lite-11.8.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-11.8.0" level="project" />
-    <orderEntry type="module" module-name="displayjokelibrary" />
-    <orderEntry type="module" module-name="JokeLibrary" />
-    <orderEntry type="module" module-name="displayjokelibrary" />
-    <orderEntry type="module" module-name="JokeLibrary" />
   </component>
 </module>
