@@ -37,15 +37,15 @@ android {
         debug {
         }
     }
-    flavorDimensions "demo"
+    flavorDimensions "udacity"
     productFlavors {
         free {
-            dimension "demo"
+            dimension "udacity"
             applicationIdSuffix ".free"
             versionNameSuffix "free"
         }
         paid {
-            dimension "demo"
+            dimension "udacity"
             applicationIdSuffix ".paid"
             versionNameSuffix "paid"
         }
@@ -78,7 +78,7 @@ dependencies {
 
     // Current version is working
     //noinspection GradleDependency
-    implementation 'com.google.android.gms:play-services-ads:11.8.0'
+    freeImplementation 'com.google.android.gms:play-services-ads:11.8.0'
 
     debugImplementation 'com.jakewharton.timber:timber:4.7.1'
 

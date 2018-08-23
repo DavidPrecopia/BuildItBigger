@@ -49,7 +49,6 @@ public class MainActivityFragment extends Fragment {
     private void init() {
         setUpOnClickListener();
         observeLiveData();
-        setUpAdView();
     }
 
     private void setUpOnClickListener() {
@@ -60,14 +59,6 @@ public class MainActivityFragment extends Fragment {
                 new EndpointsAsyncTask(joke).execute();
             }
         });
-    }
-
-    private void setUpAdView() {
-        if (AdUtil.haveAds()) {
-            binding.adView.loadAd(AdUtil.getAdRequest());
-        } else {
-            binding.adView.setVisibility(View.GONE);
-        }
     }
 
     private void observeLiveData() {
