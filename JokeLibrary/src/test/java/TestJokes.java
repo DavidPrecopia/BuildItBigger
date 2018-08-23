@@ -9,8 +9,8 @@ public class TestJokes {
     public void getJokesIndexIsValid() {
         int x = 0;
         while (x < 50) {
-            int index = Jokes.getIndex();
-            assertTrue (index >= 0 && index < Jokes.jokesList.size());
+            int index = Jokes.TestingJokes.testGetIndex();
+            assertTrue (index >= 0 && index < Jokes.TestingJokes.testListSize());
             x++;
         }
     }
