@@ -38,8 +38,10 @@ public final class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
         try {
             return myApiService.myEndpoint().sayHi().execute().getData();
         } catch (IOException e) {
-            Timber.e(e);
-            return "";
+            if (BuildConfig.DEBUG) {
+                Timber.e(e);
+            }
+            return null;
         }
     }
 
