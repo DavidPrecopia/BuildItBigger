@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Jokes {
-    private static final List<String> jokesList;
+    public static final List<String> jokesList;
     private static int jokeIndex;
 
     static {
@@ -23,7 +23,7 @@ public class Jokes {
         return jokesList.get(getIndex());
     }
 
-    private static int getIndex() {
+    public static int getIndex() {
         if (jokeIndex == jokesList.size()) {
             jokeIndex = 0;
         }
