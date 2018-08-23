@@ -28,7 +28,6 @@ public class MainActivityFragment extends Fragment {
     private FragmentMainBinding binding;
 
     private MutableLiveData<String> joke;
-    private EndpointsAsyncTask asyncTask;
 
 
     public MainActivityFragment() {
@@ -38,7 +37,6 @@ public class MainActivityFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.joke = new MutableLiveData<>();
-        this.asyncTask = new EndpointsAsyncTask(joke);
     }
 
     @Override
@@ -59,7 +57,7 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 progressBarVisibility(View.VISIBLE);
-                asyncTask.execute();
+                new EndpointsAsyncTask(joke).execute();
             }
         });
     }
