@@ -87,7 +87,7 @@ public class MainActivityFragment extends Fragment {
     }
 
 
-    public static final class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
+    static final class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
 
         private static MyApi myApiService;
         private final MutableLiveData<String> joke;
