@@ -29,14 +29,4 @@ public class Jokes {
         }
         return jokeIndex++;
     }
-
-
-    public static final class TestingJokes extends Jokes {
-        public static int testListSize() {
-            return Jokes.jokesList.size();
-        }
-        public static int testGetIndex() {
-            return Jokes.getIndex();
-        }
-    }
 }
